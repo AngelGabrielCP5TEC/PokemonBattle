@@ -1,4 +1,4 @@
-package com.springboot.db.service;
+package main.java.com.pokemonbattle.demo.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,29 +12,19 @@ import com.google.firebase.cloud.FirestoreClient;
 public class FirebaseService {
 
     public String guardarDato() {
-
         try {
-
-            // obtener instancia de Firestore
             Firestore db = FirestoreClient.getFirestore();
-
-            // datos a guardar
             Map<String, Object> data = new HashMap<>();
             data.put("mensaje", "Conexion exitosa con Firestore");
             data.put("estado", "ok");
-
-            // guardar en colección
             db.collection("test")
                 .document("doc1")
                 .set(data);
-
             return "Datos guardados correctamente";
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "Error al guardar datos";
+            return "Error al guardar datos: " + e.getMessage();
         }
     }
 }
-
-
